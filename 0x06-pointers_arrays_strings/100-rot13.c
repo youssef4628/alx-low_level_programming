@@ -1,25 +1,30 @@
+#include "main.h"
+
 /**
- * rot13 - function to encode string using rot13.
- * @str: address of the string.
- * Return: the encoded @str.
+ * rot13 - encoding a string using rot13.
+ * @s: the string to be encoded to rot13.
+ * Return: the string s encoded to rot13.
  */
 
-char *rot13(char *str)
+char *rot13(char *s)
 {
-	int i;
+	int i = 0, j = 0;
+	char string_rot13[] = "NnOoPpQqRrSsTtUuVvWwXxYyZzAaBbCcDdEeFfGgHhIiJjKkLlMm";
+	char string_alpha[] = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
 
-	for (i = 0; str[i] != '\0'; i++)
+	while (s[i] != '\0')
 	{
-		if ((str[i] >= 'a' && str[i] < 'n')
-			|| (str[i] >= 'A' && str[i] < 'N'))
-		{
-			str[i] += 13;
-		}
-		else if ((str[i] >= 'n' && str[i] <= 'z')
-			 || (str[i] >= 'N' && str[i] <= 'Z'))
-		{
-			str[i] -= 13;
-		}
+		do {
+			if (s[i] == string_alpha[j])
+			{
+				s[i] = string_rot13[j];
+				break;
+			}
+			j++;
+		} while (string_alpha[j] != '\0');
+		j = 0;
+		i++;
 	}
-	return (str);
+
+	return (s);
 }
